@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: datadog-service2
+  name: datadog-service2
+  namespace: default
+spec:
+  ports:
+  - port: 8125
+    protocol: UDP
+    targetPort: 8125
+  selector:
+    app: datadog-agent2
+  sessionAffinity: None
+  type: ClusterIP

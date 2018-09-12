@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: stats-tester
+  labels:
+    app: stats-tester
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: stats-tester
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 15%
+  template:
+    metadata:
+      labels:
+        app: stats-tester
+    spec:
+      nodeSelector:
+        stats-tester: "true"
+      terminationGracePeriodSeconds: 30
+      restartPolicy: Always
+      containers:
+      - name: stats-tester
+        image: "us.gcr.io/bx-preflight/stats-tester:20180912.e7a1b4e"
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+          requests:
+            cpu: 150m
+            memory: 128Mi
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name

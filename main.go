@@ -12,7 +12,7 @@ import (
 const N = 100
 
 func main() {
-    c, err := statsd.New("127.0.0.1:8125")
+    c, err := statsd.New("datadog-service2:8125")
     if err != nil {
         log.Fatal(err)
     }
