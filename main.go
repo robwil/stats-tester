@@ -16,9 +16,13 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+    podName := os.Getenv("POD_NAME")
+    if podName == "" {
+        log.Fatal("expected POD_NAME envvar")
+    }
     // prefix every metric with the app name
     c.Namespace = "test."
-
+    c.Tags = []string{"pod:" + podName}
 
     for i := 0; i < N; i++ {
         ticker := time.NewTicker(time.Millisecond * 5)
