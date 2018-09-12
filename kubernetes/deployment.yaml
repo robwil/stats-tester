@@ -25,7 +25,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: stats-tester
-        image: "us.gcr.io/bx-preflight/stats-tester:20180912.e7a1b4e"
+        image: "us.gcr.io/bx-preflight/stats-tester:20180912.b14e95f"
         resources:
           limits:
             cpu: 200m
